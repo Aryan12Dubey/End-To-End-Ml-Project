@@ -25,6 +25,10 @@ class DataIngestion:
         logging.info("Entered data ingestion method or component")
         try:
          df=pd.read_csv('data/StudentsPerformance.csv')
+
+         df.columns = df.columns.str.replace(' ', '_')
+         df.columns = df.columns.str.replace('/', '_')
+
          logging.info('Reading the data ')
          os.makedirs(os.path.dirname(self.ingestion_config.train_data_path),exist_ok=True)
          df.to_csv(self.ingestion_config.row_data_path,index=False,header=True)
